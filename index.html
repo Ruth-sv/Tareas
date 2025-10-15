@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+#objeto{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(97, 197, 255);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+}
+</style>
+
+<body>
+    <div id="objeto"> </div>
+
+    <script>
+    let movimiento = false
+    const objeto = document.getElementById('objeto')
+
+     objeto.addEventListener('mousedown',  administrarMovimiento)
+     objeto.addEventListener('mousemove', administrarMovimiento)
+     objeto.addEventListener('mouseup', administrarMovimiento)
+
+     function administrarMovimiento(e){
+        if(e.type == 'mousedown'){
+        movimiento = true
+        }
+        else if(e.type == 'mousemove'&& movimiento === true){
+        objeto.style.left = e.clientX + 'px';
+        objeto.style.top = e.clientY + 'px';
+        }
+        else{
+           movimiento = false 
+        }
+     }
+
+     function colorAleatorio() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+
+    objeto.addEventListener('click', () => {
+      objeto.style.backgroundColor = colorAleatorio();
+    });
+
+    </script>
+</body>
+</html>
