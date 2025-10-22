@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+         body {
+         background: #ffffff;
+         color: rgb(255, 151, 219);
+         font-family: sans-serif;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 700px;
+    }
+
+     .calculadora {
+      background: #ff98ee;
+      padding: 20px;
+      border-radius: 10px;
+      width: 260px;
+    }
+    
+    #pantalla {
+      background: #ff25c1;
+      color: rgb(255, 255, 255);
+      font-size: 45px;
+      text-align: right;
+      border-radius: 5px;
+    margin-bottom: 10px;
+    }
+ 
+      button {
+      width: 60px;
+      height: 60px;
+      margin: 4px;
+      font-size: 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    button.operador { background: #87afff; color: white; }
+    button.igual { background: #addcff; color: white; }
+    button.borrar { background: #bcd5ff; color: white; }
+    button:not(.operador):not(.igual):not(.borrar) {background: #ff54d1;color: #ffffff;}
+  </style>
+
+</body>
+
+     <div class="calculadora">
+    <div id="pantalla">0</div>
+    
+    <div class="botones">
+      <button id="borrar" class="borrar btn">C</button>
+      <button class="operador btn">/</button>
+      <button class="operador btn">*</button>
+       
+      <button class="btn">7</button>
+      <button class="btn">8</button>
+      <button class="btn">9</button>
+      <button class="btn">4</button>
+      <button class="btn">5</button>
+      <button class="btn">6</button>
+      <button class="btn">1</button>
+      <button class="btn">2</button>
+      <button class="btn">3</button>
+      <button class="btn">0</button>
+      <button class="btn">.</button>
+      <button id="igual" class="igual btn">=</button>
+      <button class="operador btn">+</button>
+      <button class="operador btn">-</button>
+    </div>
+  </div>
+
+      <script> 
+
+     const pantalla = document.getElementById("pantalla");
+     const botones = document.querySelectorAll(".btn");
+     const igual = document.getElementById("igual");
+     const borrar = document.getElementById("borrar");
+
+     let operacion = "";
+
+     botones.forEach(boton => {
+     boton.addEventListener("click", () => {
+     const valor = boton.textContent;
+
+        
+     if (valor !== "=" && valor !== "C") {
+     if (pantalla.textContent === "0" && valor !== ".") {pantalla.textContent = valor;
+     } 
+    
+     else { pantalla.textContent += valor;
+     }
+          operacion += valor; }});
+     });
+
+    igual.addEventListener("click", () => {
+        try {
+        let resultado = eval(operacion);
+        pantalla.textContent = resultado;
+        operacion = resultado.toString();
+      } catch {
+        pantalla.textContent = "Error";
+        operacion = "";
+      }
+    });
+
+    borrar.addEventListener("click", () => {
+      pantalla.textContent = "0";
+      operacion = "";
+    });
+  </script>
+
+</body>
+</html>
