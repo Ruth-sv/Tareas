@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #fdf6ff;
+      overflow: hidden;
+      cursor: none; /* oculta el cursor original */
+    }
+
+    .particula {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      pointer-events: none; /* no interfiere con el mouse */
+      opacity: 1;
+      transition: transform 0.3s, opacity 0.5s;
+    }
+  </style>
+</head>
+<body>
+    <script>
+    document.addEventListener("mousemove", (e) => {
+         const circulo = document.createElement("div");
+      circulo.classList.add("particula");
+
+       circulo.style.left = e.pageX + "px";
+      circulo.style.top = e.pageY + "px";
+
+       document.body.appendChild(circulo);
+
+       setTimeout(() => {
+        circulo.style.opacity = "0";
+        circulo.style.transform = "scale(2)"; }, 50);
+
+        setTimeout(() => {
+        circulo.remove();
+      }, 800);
+    });
+  </script>
+</body>
+</html>
